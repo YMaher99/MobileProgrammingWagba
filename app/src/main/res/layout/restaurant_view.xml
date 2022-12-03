@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp">
+
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="99dp"
+        android:layout_height="99dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:foregroundGravity="center"
+        ></ImageView>
+
+
+    <TextView
+        android:id="@+id/textviewrestaurantname"
+        android:layout_width="0dp"
+        android:layout_height="33dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageview"
+        app:layout_constraintTop_toTopOf="@id/imageview"
+        android:text="Restaurant Name"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:textSize="18dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+            android:id="@+id/textviewrestaurantlocation"
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageview"
+            app:layout_constraintTop_toBottomOf="@id/textviewrestaurantname"
+            android:text="Restaurant Location"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+        ></TextView>
+    <TextView
+            android:id="@+id/textviewcuisine"
+            android:layout_width="0dp"
+            android:layout_height="33dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageview"
+            app:layout_constraintTop_toBottomOf="@id/textviewrestaurantlocation"
+            android:text="Cuisine"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            ></TextView>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

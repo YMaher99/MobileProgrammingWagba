@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Wagba</string>
+    <string name="email_hint">E-mail</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+</resources>
