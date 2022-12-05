@@ -50,7 +50,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button"
+                app:layout_constraintTop_toBottomOf="@+id/confirm_password_text"
                 />
 
             <EditText
@@ -67,9 +67,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.049"
                 tools:ignore="TouchTargetSizeCheck"
-                android:textColorHint="#555555"
                 android:backgroundTint="@color/foreground_element"
                 />
+
+
 
             <EditText
                 android:id="@+id/password_text"
@@ -83,10 +84,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/email_text"
                 tools:ignore="TouchTargetSizeCheck"
-                android:textColorHint="#555555"
                 android:backgroundTint="@color/foreground_element"/>
 
-            <Button
+            <EditText
+                android:id="@+id/confirm_password_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/confirm_password_hint"
+                app:layout_constraintTop_toBottomOf="@id/password_text"
+                />
+
+<!--            <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,7 +104,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password_text" />
+                app:layout_constraintTop_toBottomOf="@+id/confirm_password_text" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
