@@ -44,14 +44,14 @@
           >
 
          <TextView
-             android:id="@+id/textviewrestaurantname"
+             android:id="@+id/meal_name_tv"
              android:layout_width="match_parent"
              android:layout_height="0dp"
              app:layout_constraintVertical_weight="2"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
              app:layout_constraintTop_toTopOf="parent"
-             app:layout_constraintBottom_toTopOf="@id/textviewrestaurantlocation"
+             app:layout_constraintBottom_toTopOf="@id/meal_price_tv"
              android:text="Restaurant Name"
              android:gravity="center_vertical"
              android:paddingLeft="10dp"
@@ -60,13 +60,13 @@
              />
 
          <TextView
-             android:id="@+id/textviewrestaurantlocation"
+             android:id="@+id/meal_price_tv"
              android:layout_width="match_parent"
              android:layout_height="0dp"
              app:layout_constraintVertical_weight="1"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@id/textviewrestaurantname"
+             app:layout_constraintTop_toBottomOf="@id/meal_name_tv"
              app:layout_constraintBottom_toTopOf="@id/textviewcuisine"
              android:text="Restaurant Location"
              android:gravity="center_vertical"
@@ -80,7 +80,6 @@
              app:layout_constraintBottom_toBottomOf="parent"
              app:layout_constraintEnd_toEndOf="parent"
              app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@id/textviewrestaurantlocation"
 
              android:text="Cuisine"
              android:gravity="center_vertical"

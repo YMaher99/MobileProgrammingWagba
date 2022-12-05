@@ -9,24 +9,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class RestaurantAdapter extends RecyclerView.Adapter<MyRestaurantHolder> {
 
     Context context;
-    List<Restaurant> items;
+    List<Restaurant_Item> items;
 
-    public MyAdapter(Context context, List<Restaurant> items) {
+    public RestaurantAdapter(Context context, List<Restaurant_Item> items) {
         this.context = context;
         this.items = items;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.restaurant_view,parent,false));
+    public MyRestaurantHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new MyRestaurantHolder(LayoutInflater.from(context).inflate(R.layout.restaurant_view,parent,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyRestaurantHolder holder, int position) {
         holder.res_name.setText((items.get(position).getName()));
         holder.res_loc.setText((items.get(position).getAddress()));
         holder.res_cuisine.setText((items.get(position).getCuisineType()));

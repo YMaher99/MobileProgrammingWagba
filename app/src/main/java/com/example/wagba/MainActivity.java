@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.wagba.databinding.ActivityMainBinding;
-
 public class MainActivity extends AppCompatActivity {
 
     //ActivityMainBinding
@@ -15,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this,RestaurantActivity.class);
+        Intent intent = new Intent(this, RestaurantActivity.class);
         startActivity(intent);
 
 

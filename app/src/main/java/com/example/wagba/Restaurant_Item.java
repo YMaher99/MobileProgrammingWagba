@@ -1,12 +1,12 @@
 package com.example.wagba;
 
-public class Restaurant {
+public class Restaurant_Item {
     private String name;
     private String address;
     private String cuisineType;
     private int image;
 
-    public Restaurant(String name, String address, String cuisineType, int image) {
+    public Restaurant_Item(String name, String address, String cuisineType, int image) {
         this.name = name;
         this.address = address;
         this.cuisineType = cuisineType;
