@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, RestaurantsActivity.class);
+        Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
 
     }
