@@ -7,6 +7,16 @@
     tools:context=".RestaurantsActivity"
     android:background="@color/background">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/foreground_element"
+        android:layout_margin="10dp"
+        android:id="@+id/cart_fab"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
