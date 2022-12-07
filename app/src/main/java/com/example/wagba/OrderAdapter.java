@@ -27,7 +27,7 @@ public class OrderAdapter extends RecyclerView.Adapter<MyOrderHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyOrderHolder holder, int position) {
         holder.orderID.setText(items.get(position).getOrderID());
-        holder.meal_price.setText(Double.toString(items.get(position).getTotal_price())+ "EGP");
+        holder.meal_price.setText(Double.toString(items.get(position).getTotal_price())+ " EGP");
 
         if(items.get(position).getIs_delivered()){
             holder.order_status.setText("Order Status: Delivered");
