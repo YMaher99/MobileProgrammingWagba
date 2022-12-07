@@ -17,7 +17,8 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     app:cardCornerRadius="8dp"
-    android:elevation="8dp"
+    android:elevation="10dp"
+
     >
    <androidx.appcompat.widget.LinearLayoutCompat
          android:layout_width="match_parent"

@@ -18,6 +18,7 @@
         android:id="@+id/cart_fab"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     <androidx.appcompat.widget.SearchView
+        app:queryHint="Search for a restaurant by name"
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

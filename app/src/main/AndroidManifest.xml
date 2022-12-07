@@ -13,6 +13,20 @@
         android:theme="@style/Theme.Wagba"
         tools:targetApi="31">
         <activity
+            android:name=".OrderHistoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".OrderTrackingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".PaymentActivity"
             android:exported="false">
             <meta-data
