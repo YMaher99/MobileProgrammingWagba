@@ -36,7 +36,7 @@
             android:textSize="25sp"
             android:textColor="@color/black"
             android:text="Your Order History"
-            android:layout_margin="10dp"/>
+            android:layout_marginLeft="10dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
