@@ -73,10 +73,21 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/payment_radio_group"
+        app:layout_constraintTop_toBottomOf="@id/delivery_radio_group"
         app:layout_constraintStart_toStartOf="parent"
         android:text="Payment Total"
         android:textColor="@color/black"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/meal_price_tv"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/delivery_radio_group"
+        app:layout_constraintStart_toStartOf="@id/delivery_radio_group"
+        android:textColor="@color/black"
+        android:text="100 EGP"
         android:textSize="16dp"/>
 
     <TextView
@@ -84,10 +95,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/payment_radio_group"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Delivery Time"
         android:textColor="@color/black"
-        android:text="100 EGP"
-        android:textSize="16dp"/>
+        android:textSize="16dp"
+        />
+
+    <RadioGroup
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/payment_radio_group"
+        app:layout_constraintTop_toBottomOf="@id/payment_radio_group"
+        android:id="@+id/delivery_radio_group"
+        >
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="12:00 PM"
+            android:textSize="16dp"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="03:00 PM"
+            android:textSize="16dp"/>
+    </RadioGroup>
 
     <Button
         android:layout_width="match_parent"
