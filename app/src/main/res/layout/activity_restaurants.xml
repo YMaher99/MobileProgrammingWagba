@@ -7,33 +7,73 @@
     tools:context=".RestaurantsActivity"
     android:background="@color/background">
 
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-45dp"
+        tools:layout_editor_absoluteY="-130dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingTop="10dp"
+            android:layout_weight="0.4"
+            android:src="@drawable/wagba_logo"
+            android:background="@color/white"
+            >
+
+        </ImageView>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:background="@color/white"
+            android:layoutDirection="rtl"
+            app:queryHint="Search for a restaurant by name"
+
+            />
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:clipToPadding="false"
+            android:paddingBottom="60dp" />
+
+
+
+
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/menu_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/white"
+        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/black"
+        ></com.google.android.material.bottomnavigation.BottomNavigationView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/cart"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/foreground_element"
         android:layout_margin="10dp"
-        android:id="@+id/cart_fab"></com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-    <androidx.appcompat.widget.SearchView
-        app:queryHint="Search for a restaurant by name"
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layoutDirection="rtl"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
-        android:paddingBottom="60dp"
-        android:clipToPadding="false"/>
+        android:id="@+id/cart_fab"
+        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
 </androidx.constraintlayout.widget.ConstraintLayout>

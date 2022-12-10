@@ -16,151 +16,124 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:src="@drawable/wagba_logo"
-        android:layout_weight="2"
+        android:layout_weight="0.4"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
+        android:background="@color/white"
         />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/order_details"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/wagba_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0"
+        android:gravity="center_vertical"
+
         >
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/restaurant_name"
         app:layout_constraintTop_toBottomOf="@id/search_view"
         app:layout_constraintBottom_toTopOf="@id/rv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/restaurant_logo"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:textSize="25sp"
+
+
+        android:textSize="18sp"
         android:text="Tracking Order Number ####"
         android:textColor="@color/black"
         />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/accepted_layout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintStart_toStartOf="parent"
-    android:layout_weight="1"
-    app:layout_constraintTop_toBottomOf="@id/order_details"
-    android:layout_margin="10dp"
-    >
 
-    <ProgressBar
-
-        android:id="@+id/accepted_progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="10dp"
-        />
 
-    <TextView
-        android:id="@+id/accepted_tv"
-        android:text="Order Being Accepted"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/accepted_progressBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="10dp"
         android:layout_margin="10dp"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/meal_prepared_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_weight="1"
-        app:layout_constraintTop_toBottomOf="@id/accepted_layout"
-        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
         >
 
-        <ProgressBar
-
-            android:id="@+id/meal_prepared_progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="10dp"
-            />
-
-        <TextView
-            android:id="@+id/meal_prepared_tv"
-            android:text="Wagba Being Prepared"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/meal_prepared_progressBar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="10dp"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/meal_delivered_layout"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_weight="1"
-        app:layout_constraintTop_toBottomOf="@id/meal_prepared_layout"
+        android:gravity="center"
         android:layout_margin="10dp"
+        android:orientation="vertical"
+
         >
 
-        <ProgressBar
-            android:id="@+id/meal_delivered_progressBar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
+        <moe.feng.common.stepperview.VerticalStepperItemView
+            android:id="@+id/stepper_0"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="10dp"
-            />
+            android:layout_marginTop="5dp"
+            app:step_index="1"
+            app:step_state="selected"
+            app:step_summary="Your Wagba is being processed"
+            app:step_summary_done="Your Wagba was ordered successfully"
+            app:step_title="Ordered" />
 
-        <TextView
-            android:id="@+id/meal_delivered_tv"
-            android:text="Wagba Being Delivered"
-            android:textSize="20dp"
-            android:textColor="@color/black"
+        <moe.feng.common.stepperview.VerticalStepperItemView
+            android:id="@+id/stepper_2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/meal_delivered_progressBar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="10dp"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginTop="0dp"
+            app:step_index="2"
+            app:step_summary="Your Wagba is being accepted by the restaurant"
+            app:step_summary_done="Your Wagba was accepted"
+            app:step_title="Accepted" />
+
+        <moe.feng.common.stepperview.VerticalStepperItemView
+            android:id="@+id/stepper_s3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:step_index="3"
+            app:step_summary="Your Wagba is being prepared by the restaurant"
+            app:step_summary_done="Your Wagba was prepared by the restaurant"
+            app:step_title="Preparing" />
+
+        <moe.feng.common.stepperview.VerticalStepperItemView
+            android:id="@+id/stepper_s4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-10dp"
+            app:step_index="4"
+            app:step_is_last="true"
+            app:step_summary="Your Wagba is out for Delivery"
+            app:step_summary_done="Your Wagba was Delivered"
+            app:step_title="Delivering" />
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"></View>
 </androidx.appcompat.widget.LinearLayoutCompat>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_bar"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -43,16 +43,16 @@ public class RestaurantsActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = binding.recyclerview;
         List<Restaurant_Item> items = new ArrayList<Restaurant_Item>();
-        items.add(new Restaurant_Item("Mcdonald's","ta7t beety","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","ta7t beety","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","ta7t beety","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","ta7t beety","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","ta7t beety","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","ta7t beety","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","ta7t beety","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","ta7t beety","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","ta7t beety","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","ta7t beety","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("Mcdonald's","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RestaurantAdapter(getApplicationContext(),items));
 
