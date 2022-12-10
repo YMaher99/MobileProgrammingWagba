@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RestaurantActivity"
-    android:background="@color/background">
+    android:background="@color/dark_grey">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -17,52 +17,24 @@
         android:layout_margin="10dp"
         android:id="@+id/cart_fab"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layoutDirection="rtl"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/restaurant_details"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="10dp"
-        android:elevation="10dp">
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/restaurant_details_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
+
         >
 
 
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:id="@+id/restaurant_name"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
-        app:layout_constraintBottom_toTopOf="@id/rv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/restaurant_logo"
-        android:layout_weight="2"
-        android:gravity="center_vertical"
-        android:textSize="25sp"
-        android:text="Restaurant Name"
-        android:textColor="@color/black"
-        />
+
 
 
     <ImageView
@@ -71,24 +43,40 @@
         android:layout_height="match_parent"
         android:layout_weight="0.3"
         android:src="@drawable/mcdonalds"
-        app:layout_constraintStart_toEndOf="@id/restaurant_details"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_view"
         app:layout_constraintBottom_toTopOf="@id/rv"
         android:foregroundGravity="right"
+
     ></ImageView>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layoutDirection="rtl"
+
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/bg_white_rounded"
+            />
+
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintVertical_weight="1"
         android:paddingBottom="60dp"
-        android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/restaurant_details"
+        android:background="@color/light_grey"
+
+
+        app:layout_constraintTop_toBottomOf="@id/restaurant_details_layout"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -98,8 +86,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/foreground_element"
+        app:itemTextColor="@color/foreground_element"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_bar"></com.google.android.material.bottomnavigation.BottomNavigationView>

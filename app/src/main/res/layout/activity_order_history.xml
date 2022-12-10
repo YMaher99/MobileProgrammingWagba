@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrderHistoryActivity"
-    android:background="@color/background">
+    android:background="@color/grey">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
 
-                android:background="@color/white"
+                android:background="@color/dark_grey"
                 />
 
 
@@ -42,11 +42,12 @@
             >
 
             <androidx.recyclerview.widget.RecyclerView
+
                 android:id="@+id/orders_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="1dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="50dp"
+                android:clipToPadding="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 ></androidx.recyclerview.widget.RecyclerView>
@@ -62,7 +63,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:itemIconTint="@color/foreground_element"
-        app:itemTextColor="@color/black"
+        app:itemTextColor="@color/foreground_element"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_bar"></com.google.android.material.bottomnavigation.BottomNavigationView>

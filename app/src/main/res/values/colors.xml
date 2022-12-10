@@ -8,7 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <!--<color name="background">#d6dee8</color>-->
-    <color name="background">#7895B2</color>
+    <color name="background">#d6dee8</color>
     <color name="foreground_element">#375f94</color>
+<!--    <color name="foreground_element">#00BCD4</color>-->
     <color name="card_color">#B5C4D6</color>
+    <color name="grey">#444444</color>
+    <color name="light_grey">#666666</color>
+    <color name="dark_grey">#222222</color>
 </resources>

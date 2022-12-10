@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RestaurantsActivity"
-    android:background="@color/background">
+    android:background="@color/dark_grey">
 
 
 
@@ -13,30 +13,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="-45dp"
-        tools:layout_editor_absoluteY="-130dp">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            >
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:paddingTop="10dp"
-            android:layout_weight="0.4"
-            android:src="@drawable/wagba_logo"
-            android:background="@color/white"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/wagba_logo_text"
+
             >
 
         </ImageView>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:layoutDirection="rtl"
+                app:queryHint="Search for a restaurant by name"
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:background="@color/white"
-            android:layoutDirection="rtl"
-            app:queryHint="Search for a restaurant by name"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/bg_white_rounded"
+                />
 
-            />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 
@@ -46,7 +58,8 @@
             android:layout_height="0dp"
             android:layout_weight="5"
             android:clipToPadding="false"
-            android:paddingBottom="60dp" />
+            android:paddingBottom="60dp"
+            android:background="@color/light_grey"/>
 
 
 
@@ -63,8 +76,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/white"
-        app:itemTextColor="@color/black"
-        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/foreground_element"
+        app:itemIconTint="@color/foreground_element"
         ></com.google.android.material.bottomnavigation.BottomNavigationView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

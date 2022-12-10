@@ -5,67 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrderTrackingActivity"
-    android:background="@color/background">
+    android:background="@color/dark_grey">
 <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <ImageView
-        android:layout_margin="10dp"
-        android:id="@+id/wagba_logo"
+    <TextView
+        android:id="@+id/top_tv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@drawable/wagba_logo"
-        android:layout_weight="0.4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/white"
-        />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/order_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/wagba_logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="10dp"
-        android:layout_weight="0"
-        android:gravity="center_vertical"
-
-        >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/restaurant_name"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
+        android:layout_weight="0.2"
+        android:gravity="center"
+        android:text="Order Number ####"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/rv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/restaurant_logo"
+        app:layout_constraintTop_toBottomOf="@id/search_view"
+        android:textColor="@color/foreground_element"/>
 
 
-        android:textSize="18sp"
-        android:text="Tracking Order Number ####"
-        android:textColor="@color/black"
-        />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
 
-        android:elevation="10dp"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="10dp"
+
         >
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:layout_margin="10dp"
         android:orientation="vertical"
@@ -107,7 +80,7 @@
             android:id="@+id/stepper_s4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-10dp"
+            android:layout_marginBottom="10dp"
             app:step_index="4"
             app:step_is_last="true"
             app:step_summary="Your Wagba is out for Delivery"
@@ -118,21 +91,26 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
-    <View
-        android:layout_width="wrap_content"
+
+
+<!--    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"></View>
-</androidx.appcompat.widget.LinearLayoutCompat>
+        android:layout_weight="1"
+        android:background="@color/white"></View>-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/foreground_element"
+        app:itemTextColor="@color/foreground_element"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_bar"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
