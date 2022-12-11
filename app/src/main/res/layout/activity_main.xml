@@ -94,7 +94,6 @@
                 android:backgroundTint="@color/foreground_element"
                 android:text="@string/sign_in"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/button2"
                 android:textColor="@color/dark_grey"

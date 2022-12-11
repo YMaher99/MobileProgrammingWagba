@@ -30,17 +30,17 @@ public class CartActivity extends AppCompatActivity {
         RecyclerView recyclerView = binding.recyclerview;
         List<Meal_Item> items = cart.getMeals();
         items.add(new Meal_Item("Happy Meal",35.0,Boolean.TRUE));
-        items.add(new Meal_Item("Big Mac",50.0,Boolean.FALSE));
+        items.add(new Meal_Item("Big Mac",50.0,Boolean.TRUE));
         items.add(new Meal_Item("Happy Meal",35.0,Boolean.TRUE));
-        items.add(new Meal_Item("Big Mac",50.0,Boolean.FALSE));
+        items.add(new Meal_Item("Big Mac",50.0,Boolean.TRUE));
         items.add(new Meal_Item("Happy Meal",35.0,Boolean.TRUE));
-        items.add(new Meal_Item("Big Mac",50.0,Boolean.FALSE));
+        items.add(new Meal_Item("Big Mac",50.0,Boolean.TRUE));
         items.add(new Meal_Item("Happy Meal",35.0,Boolean.TRUE));
-        items.add(new Meal_Item("Big Mac",50.0,Boolean.FALSE));
+        items.add(new Meal_Item("Big Mac",50.0,Boolean.TRUE));
         items.add(new Meal_Item("Happy Meal",35.0,Boolean.TRUE));
-        items.add(new Meal_Item("Big Mac",50.0,Boolean.FALSE));
+        items.add(new Meal_Item("Big Mac",50.0,Boolean.TRUE));
         items.add(new Meal_Item("Happy Meal",35.0,Boolean.TRUE));
-        items.add(new Meal_Item("Big Mac",50.0,Boolean.FALSE));
+        items.add(new Meal_Item("Big Mac",50.0,Boolean.TRUE));
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

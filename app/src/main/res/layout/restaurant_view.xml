@@ -84,7 +84,7 @@
              android:text="Cuisine"
              android:gravity="center_vertical"
              android:paddingLeft="10dp"
-             android:layout_marginBottom="3dp"
+             android:layout_marginBottom="5dp"
              />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
