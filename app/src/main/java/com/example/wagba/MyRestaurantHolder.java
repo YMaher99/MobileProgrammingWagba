@@ -12,11 +12,22 @@ public class MyRestaurantHolder extends RecyclerView.ViewHolder {
     TextView res_name,res_loc,res_cuisine;
 
 
-    public MyRestaurantHolder(@NonNull View itemView) {
+    public MyRestaurantHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
         super(itemView);
         imageView = itemView.findViewById(R.id.imageview);
         res_name = itemView.findViewById(R.id.meal_name_tv);
         res_loc = itemView.findViewById(R.id.meal_price_tv);
         res_cuisine = itemView.findViewById(R.id.textviewcuisine);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (recyclerViewInterface != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        recyclerViewInterface.onItemClick(position);
+                    }
+                }
+            }
+        });
     }
 }

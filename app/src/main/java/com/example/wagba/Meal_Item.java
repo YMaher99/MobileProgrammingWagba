@@ -4,11 +4,17 @@ public class Meal_Item {
     private String name;
     private double price;
     private Boolean isAvailable;
+    private int numAvailable;
 
-    public Meal_Item(String name, double price, Boolean isAvailable) {
+    public Meal_Item(String name, double price, Boolean isAvailable){
+        this(name,price,isAvailable,0);
+    }
+
+    public Meal_Item(String name, double price, Boolean isAvailable, int numAvailable) {
         this.name = name;
         this.price = price;
         this.isAvailable = isAvailable;
+        this.numAvailable = numAvailable;
     }
 
     public String getName() {
@@ -33,5 +39,13 @@ public class Meal_Item {
 
     public void setAvailable(Boolean available) {
         isAvailable = available;
+    }
+
+    public int getNumAvailable() {
+        return numAvailable;
+    }
+
+    public void setNumAvailable(int numAvailable) {
+        this.numAvailable = numAvailable;
     }
 }

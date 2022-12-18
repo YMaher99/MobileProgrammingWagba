@@ -1,13 +1,17 @@
 package com.example.wagba;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.wagba.databinding.ActivityOrderHistoryBinding;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,5 +41,30 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new OrderAdapter(getApplicationContext(),items));
+
+        binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                switch (item.getItemId()){
+                    case R.id.firstTab:
+                        intent = new Intent(getApplicationContext(),RestaurantsActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.secondTab:
+                        intent = new Intent(getApplicationContext(),CartActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.thirdTab:
+                        //intent = new Intent(getApplicationContext(),OrderHistoryActivity.class);
+                        //startActivity(intent);
+
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
+            }
+        });
     }
 }

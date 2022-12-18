@@ -20,25 +20,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-<!--            <ImageView
-                android:id="@+id/imageview"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:foregroundGravity="center"
-                android:scaleType="fitCenter"
 
-                ></ImageView>-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:orientation="vertical"
-                android:padding="20dp"
+                android:padding="10dp"
                 >
 
                 <TextView
@@ -57,6 +46,42 @@
                     android:textStyle="bold"
                     android:textColor="@color/foreground_element"
                     />
+
+                <Button
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintEnd_toEndOf="@id/meals_available_tv"
+                    app:layout_constraintStart_toStartOf="@id/meals_available_tv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/add_to_cart_button"
+                    android:background="@drawable/add_to_cart_button"
+                    android:gravity="center"
+                    android:text="+"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Num. of meals available: X"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/remove_from_cart_button"
+                    app:layout_constraintTop_toBottomOf="@id/add_to_cart_button"
+                    android:layout_margin="10dp"
+                    android:id="@+id/meals_available_tv"
+                    android:textColor="@color/black"
+
+                    ></TextView>
+
+                <Button
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintEnd_toEndOf="@id/meals_available_tv"
+                    app:layout_constraintStart_toStartOf="@id/meals_available_tv"
+                    app:layout_constraintTop_toBottomOf="@id/meals_available_tv"
+                    android:id="@+id/remove_from_cart_button"
+                    android:background="@drawable/remove_from_cart_button"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="-"/>
 
                 <TextView
                     android:id="@+id/meal_price_tv"
@@ -82,10 +107,10 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintTop_toBottomOf="@id/meal_name_tv"
+                    app:layout_constraintTop_toBottomOf="@id/add_to_cart_button"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/meal_price_tv"
+
                     android:layout_marginBottom="10dp"
                     />
 
