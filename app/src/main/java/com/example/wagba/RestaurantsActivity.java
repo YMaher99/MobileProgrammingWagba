@@ -13,11 +13,17 @@ import android.view.View;
 
 import com.example.wagba.databinding.ActivityRestaurantsBinding;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class RestaurantsActivity extends AppCompatActivity implements RecyclerViewInterface {
@@ -26,8 +32,9 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
     ActivityRestaurantsBinding binding;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://wagba-6d31f-default-rtdb.europe-west1.firebasedatabase.app/");
-    DatabaseReference restaurants = database.getReference("Restaurants");
+    DatabaseReference restaurants = database.getReference("restaurants");
     List<Restaurant_Item> items = new ArrayList<Restaurant_Item>();
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,24 +42,40 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
         binding = ActivityRestaurantsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        Log.i("CONTEXT",getApplicationContext().getClass().toString());
+        mAuth = FirebaseAuth.getInstance();
 
-/*        binding.recyclerview.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+        ValueEventListener postListener = new ValueEventListener() {
             @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                return false;
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                for (DataSnapshot restaurant: dataSnapshot.getChildren()){
+                    String name = restaurant.child("name").getValue().toString();
+                    String restaurant_details = restaurant.child("restaurant details").getValue().toString();
+                    String cuisine = restaurant.child("cuisine").getValue().toString();
+                    String image_url = restaurant.child("image_link").getValue().toString();
+                    items.add(new Restaurant_Item(name,restaurant_details,cuisine,image_url));
+                    Log.d("items_count",Integer.toString(items.size()));
+
+
+                }
+                RecyclerView recyclerView = binding.recyclerview;
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerView.setAdapter(new RestaurantAdapter(getApplicationContext(),items,RestaurantsActivity.this));
+                //Log.d("restaurants",dataSnapshot.getChildren());
+                // ..
             }
 
             @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                Log.i("TEST","touched");
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("FAILED", "loadPost:onCancelled", databaseError.toException());
             }
+        };
+        restaurants.addValueEventListener(postListener);
 
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        Log.d("items_count",Integer.toString(items.size()));
 
-            }
-        });*/
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -86,26 +109,26 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
             }
         });
 
+
         RecyclerView recyclerView = binding.recyclerview;
-        items.add(new Restaurant_Item("Mcdonald's","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
-        items.add(new Restaurant_Item("kfc","Restaurant Details Placeholder","Fast Food",R.drawable.mcdonalds));
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RestaurantAdapter(getApplicationContext(),items,this));
 
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null){startActivity(new Intent(RestaurantsActivity.this,MainActivity.class));}
+    }
+
+    @Override
     public void onItemClick(int position) {
         Log.i("RESTAURANT",items.get(position).getName());
         Intent intent = new Intent(this, RestaurantActivity.class);
+        intent.putExtra("res_name",items.get(position).getName());
         startActivity(intent);
     }
 }

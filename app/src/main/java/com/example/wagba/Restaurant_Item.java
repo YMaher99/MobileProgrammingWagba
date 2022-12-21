@@ -4,21 +4,24 @@ public class Restaurant_Item {
     private String name;
     private String address;
     private String cuisineType;
-    private int image;
 
-    public Restaurant_Item(String name, String address, String cuisineType, int image) {
+    public Restaurant_Item(String name, String address, String cuisineType, String image_url) {
         this.name = name;
         this.address = address;
         this.cuisineType = cuisineType;
-        this.image = image;
+        this.image_url = image_url;
     }
 
-    public int getImage() {
-        return image;
+    private String image_url;
+
+
+
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public String getName() {

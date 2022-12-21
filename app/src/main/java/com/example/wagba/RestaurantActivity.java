@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -14,8 +15,11 @@ import com.example.wagba.databinding.ActivityCartBinding;
 import com.example.wagba.databinding.ActivityRestaurantBinding;
 import com.example.wagba.databinding.ActivityRestaurantsBinding;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,9 @@ import java.util.List;
 public class RestaurantActivity extends AppCompatActivity {
 
     ActivityRestaurantBinding binding;
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://wagba-6d31f-default-rtdb.europe-west1.firebasedatabase.app/");
+    DatabaseReference restaurant;
+    List<Meal_Item> items = new ArrayList<Meal_Item>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +37,44 @@ public class RestaurantActivity extends AppCompatActivity {
         binding = ActivityRestaurantBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        String res_name = getIntent().getStringExtra("res_name");
+        restaurant = database.getReference(res_name);
+
+
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                for (DataSnapshot meal: dataSnapshot.getChildren()){
+                    String name = meal.child("name").getValue().toString();
+                    double price = Double.parseDouble(meal.child("price").getValue().toString());
+                    Boolean isAvailable = Boolean.parseBoolean(meal.child("isAvailable").getValue().toString());
+                    int numAvailable = Integer.parseInt(meal.child("numAvailable").getValue().toString());
+                    items.add(new Meal_Item(name,price,isAvailable,numAvailable));
+                    Log.d("items_count",Integer.toString(items.size()));
+
+
+                }
+                RecyclerView recyclerView = binding.rv;
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items));
+                //Log.d("restaurants",dataSnapshot.getChildren());
+                // ..
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("FAILED", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        restaurant.addValueEventListener(postListener);
+
+
 
         RecyclerView recyclerView = binding.rv;
-        List<Meal_Item> items = new ArrayList<Meal_Item>();
-        items.add(new Meal_Item("Happy Meal",35.0,Boolean.TRUE));
-        items.add(new Meal_Item("Big Mac",50.0,Boolean.FALSE));
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items));

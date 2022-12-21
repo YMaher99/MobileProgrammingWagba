@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MyMealHolder extends RecyclerView.ViewHolder {
     ImageView availability_icon;
-    TextView meal_name, meal_price;
+    TextView meal_name, meal_price, meals_available;
     Button add_to_cart, remove_from_cart;
 
 
@@ -21,5 +21,6 @@ public class MyMealHolder extends RecyclerView.ViewHolder {
         meal_price = itemView.findViewById(R.id.meal_price_tv);
         add_to_cart = itemView.findViewById(R.id.add_to_cart_button);
         remove_from_cart = itemView.findViewById(R.id.remove_from_cart_button);
+        meals_available = itemView.findViewById(R.id.meals_available_tv);
     }
 }

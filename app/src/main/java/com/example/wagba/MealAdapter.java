@@ -60,6 +60,7 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                 // if ()
             }
         });
+        holder.meals_available.setText("Num of meals available: " + Integer.toString(items.get(position).getNumAvailable()));
     }
 
     @Override
