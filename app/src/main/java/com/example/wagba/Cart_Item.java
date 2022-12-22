@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Cart_Item {
 
     ArrayList<Meal_Item> Meals = new ArrayList<Meal_Item>();
-    int orderID;
+    String orderID;
 
-    public Cart_Item(int orderID) {
+    public Cart_Item(String orderID) {
         this.orderID = orderID;
     }
 

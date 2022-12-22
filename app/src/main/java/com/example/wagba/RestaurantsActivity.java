@@ -54,8 +54,6 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
                     String cuisine = restaurant.child("cuisine").getValue().toString();
                     String image_url = restaurant.child("image_link").getValue().toString();
                     items.add(new Restaurant_Item(name,restaurant_details,cuisine,image_url));
-                    Log.d("items_count",Integer.toString(items.size()));
-
 
                 }
                 RecyclerView recyclerView = binding.recyclerview;
@@ -73,8 +71,6 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
             }
         };
         restaurants.addValueEventListener(postListener);
-
-        Log.d("items_count",Integer.toString(items.size()));
 
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

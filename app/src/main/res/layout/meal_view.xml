@@ -52,35 +52,39 @@
                     android:layout_height="50dp"
                     app:layout_constraintEnd_toEndOf="@id/meals_available_tv"
                     app:layout_constraintStart_toStartOf="@id/meals_available_tv"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/meals_available_tv"
                     android:id="@+id/add_to_cart_button"
                     android:background="@drawable/add_to_cart_button"
                     android:gravity="center"
-                    android:text="+"/>
+                    android:text="+"
+                    android:layout_margin="10dp"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="Num. of meals available: X"
+                    android:text="Meals Available: X"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/remove_from_cart_button"
-                    app:layout_constraintTop_toBottomOf="@id/add_to_cart_button"
-                    android:layout_margin="10dp"
+                    app:layout_constraintBottom_toTopOf="@id/meal_price_tv"
+                    app:layout_constraintTop_toBottomOf="@id/meal_name_tv"
+
+
                     android:id="@+id/meals_available_tv"
                     android:textColor="@color/black"
-
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
                     ></TextView>
 
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_margin="10dp"
                     app:layout_constraintEnd_toEndOf="@id/meals_available_tv"
                     app:layout_constraintStart_toStartOf="@id/meals_available_tv"
                     app:layout_constraintTop_toBottomOf="@id/meals_available_tv"
                     android:id="@+id/remove_from_cart_button"
                     android:background="@drawable/remove_from_cart_button"
                     android:gravity="center"
-                    android:layout_marginTop="10dp"
                     android:text="-"/>
 
                 <TextView

@@ -29,7 +29,7 @@ public class RestaurantActivity extends AppCompatActivity {
     ActivityRestaurantBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://wagba-6d31f-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference restaurant;
-    List<Meal_Item> items = new ArrayList<Meal_Item>();
+    List<Meal_Item> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,26 +39,26 @@ public class RestaurantActivity extends AppCompatActivity {
         setContentView(view);
         String res_name = getIntent().getStringExtra("res_name");
         restaurant = database.getReference(res_name);
-
+        items = new ArrayList<Meal_Item>();
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
+                items = new ArrayList<Meal_Item>();
                 for (DataSnapshot meal: dataSnapshot.getChildren()){
+                    Log.d("TESTREMOVE",meal.child("name").toString());
                     String name = meal.child("name").getValue().toString();
                     double price = Double.parseDouble(meal.child("price").getValue().toString());
                     Boolean isAvailable = Boolean.parseBoolean(meal.child("isAvailable").getValue().toString());
                     int numAvailable = Integer.parseInt(meal.child("numAvailable").getValue().toString());
                     items.add(new Meal_Item(name,price,isAvailable,numAvailable));
-                    Log.d("items_count",Integer.toString(items.size()));
 
 
                 }
                 RecyclerView recyclerView = binding.rv;
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items));
+                recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items,res_name));
                 //Log.d("restaurants",dataSnapshot.getChildren());
                 // ..
             }
@@ -77,7 +77,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items));
+        recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items,res_name));
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

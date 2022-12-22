@@ -1,10 +1,13 @@
 package com.example.wagba;
 
 public class Meal_Item {
-    private String name;
-    private double price;
-    private Boolean isAvailable;
-    private int numAvailable;
+    public String name;
+    public double price;
+    public Boolean isAvailable;
+    public int numAvailable;
+    public Meal_Item(){
+
+    }
 
     public Meal_Item(String name, double price, Boolean isAvailable){
         this(name,price,isAvailable,0);

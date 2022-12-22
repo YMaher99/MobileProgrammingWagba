@@ -77,35 +77,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 }
-/*                users.child("users").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (!task.isSuccessful()){
-                            //TODO toast something maybe
-                        }
-                        else{
-                            String email = binding.emailText.getText().toString();
-                            String password = binding.passwordText.getText().toString();
-                            Boolean flag = Boolean.TRUE;
-
-                            for(DataSnapshot user: task.getResult().child("details").getChildren()){
-                                if(user.child("email").getValue().toString().equals(email)){
-                                    if(user.child("password").getValue().toString().equals(password)){
-                                        Intent intent = new Intent(MainActivity.this,RestaurantsActivity.class);
-                                        startActivity(intent);
-                                        flag = Boolean.FALSE;
-                                        break;
-                                    }
-                                    else{
-                                        Toast.makeText(MainActivity.this,"Incorrect Password",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            }
-                            if(flag){Toast.makeText(MainActivity.this,"Invalid Email",Toast.LENGTH_SHORT).show();}
-
-                        }
-                    }
-                });*/
             }
         });
 

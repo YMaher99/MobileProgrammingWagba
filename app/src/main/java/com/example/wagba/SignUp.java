@@ -87,29 +87,6 @@ public class SignUp extends AppCompatActivity {
                     });
                 }
 
-/*                users.child("users").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (!task.isSuccessful()){
-                            //TODO
-                        }
-                        else{
-                            String email = binding.emailText.getText().toString();
-                            String password = binding.passwordText.getText().toString();
-                            if(!password.equals(binding.confirmPasswordText.getText().toString())){return;}
-
-                            for (DataSnapshot user: task.getResult().child("details").getChildren()){
-                                if (user.child("email").getValue().toString().equals(email)){
-                                    Toast.makeText(SignUp.this,"Email Already Signed Up",Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                            }
-                            Log.d("current",task.getResult().child("current").getValue().toString());
-                            users.child("users").child("details").child(task.getResult().child("current").getValue().toString()).setValue(new User(email,password));
-                            users.child("users").child("current").setValue(Integer.toString(Integer.parseInt(task.getResult().child("current").getValue().toString())+1));
-                        }
-                    }
-                });*/
             }
         });
     }
