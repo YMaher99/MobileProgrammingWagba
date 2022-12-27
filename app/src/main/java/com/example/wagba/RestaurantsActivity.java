@@ -44,6 +44,8 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
         setContentView(view);
         mAuth = FirebaseAuth.getInstance();
 
+        binding.bottomNav.setSelectedItemId(R.id.firstTab);
+
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -89,6 +91,9 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
                         intent = new Intent(getApplicationContext(),OrderHistoryActivity.class);
                         startActivity(intent);
 
+                        break;
+                    case R.id.fourthTab:
+                        startActivity(new Intent(getApplicationContext(),ProfilePageActivity.class));
                         break;
                     default:
                         return false;

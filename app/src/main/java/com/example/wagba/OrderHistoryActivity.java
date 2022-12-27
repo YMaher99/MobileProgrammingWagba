@@ -27,6 +27,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        binding.bottomNav.setSelectedItemId(R.id.thirdTab);
+
         RecyclerView recyclerView = binding.ordersRv;
         List<Order_Item> items = new ArrayList<Order_Item>();
         ArrayList<Meal_Item> meal_list = new ArrayList<Meal_Item>();
@@ -58,7 +60,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     case R.id.thirdTab:
                         //intent = new Intent(getApplicationContext(),OrderHistoryActivity.class);
                         //startActivity(intent);
-
+                        break;
+                    case R.id.fourthTab:
+                        startActivity(new Intent(getApplicationContext(),ProfilePageActivity.class));
                         break;
                     default:
                         return false;

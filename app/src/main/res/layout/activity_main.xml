@@ -77,17 +77,18 @@
                 android:id="@+id/password_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/foreground_element"
+
                 android:ems="10"
                 android:hint="@string/password_hint"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/email_text"
-                tools:ignore="TouchTargetSizeCheck"
-                android:textColorHint="@color/grey"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/foreground_element"/>
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/sign_in_button"

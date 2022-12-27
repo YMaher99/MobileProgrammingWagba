@@ -42,6 +42,9 @@ public class CartActivity extends AppCompatActivity {
         View view = binding.getRoot();
         RecyclerView recyclerView = binding.recyclerview;
 
+        binding.bottomNav.setSelectedItemId(R.id.secondTab);
+
+
         setContentView(view);
 
         ValueEventListener postListener = new ValueEventListener(){
@@ -91,6 +94,9 @@ public class CartActivity extends AppCompatActivity {
                         intent = new Intent(getApplicationContext(),OrderHistoryActivity.class);
                         startActivity(intent);
 
+                        break;
+                    case R.id.fourthTab:
+                        startActivity(new Intent(getApplicationContext(),ProfilePageActivity.class));
                         break;
                     default:
                         return false;
