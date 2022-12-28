@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.Console;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
     DatabaseReference restaurants = database.getReference("restaurants");
     List<Restaurant_Item> items = new ArrayList<Restaurant_Item>();
     FirebaseAuth mAuth;
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +57,9 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
                     String name = restaurant.child("name").getValue().toString();
                     String restaurant_details = restaurant.child("restaurant details").getValue().toString();
                     String cuisine = restaurant.child("cuisine").getValue().toString();
-                    String image_url = restaurant.child("image_link").getValue().toString();
-                    items.add(new Restaurant_Item(name,restaurant_details,cuisine,image_url));
+                    StorageReference image_ref = storageReference.child(restaurant.child("name").getValue().toString()+".png");
+                    Log.d("IMAGE",image_ref.toString());
+                    items.add(new Restaurant_Item(name,restaurant_details,cuisine,image_ref));
 
                 }
                 RecyclerView recyclerView = binding.recyclerview;

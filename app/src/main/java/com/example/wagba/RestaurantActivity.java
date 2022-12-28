@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.example.wagba.databinding.ActivityCartBinding;
 import com.example.wagba.databinding.ActivityRestaurantBinding;
 import com.example.wagba.databinding.ActivityRestaurantsBinding;
@@ -20,6 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class RestaurantActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://wagba-6d31f-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference restaurant;
     List<Meal_Item> items;
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,7 @@ public class RestaurantActivity extends AppCompatActivity {
         String res_name = getIntent().getStringExtra("res_name");
         restaurant = database.getReference(res_name);
         items = new ArrayList<Meal_Item>();
+        Glide.with(this).load(storageReference.child(res_name+".png")).into(binding.restaurantLogo);
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override

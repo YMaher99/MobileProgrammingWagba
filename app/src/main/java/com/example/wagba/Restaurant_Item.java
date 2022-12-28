@@ -1,28 +1,24 @@
 package com.example.wagba;
 
+import com.google.firebase.storage.StorageReference;
+
 public class Restaurant_Item {
     private String name;
     private String address;
     private String cuisineType;
+    public StorageReference image_ref;
 
-    public Restaurant_Item(String name, String address, String cuisineType, String image_url) {
+    public Restaurant_Item(String name, String address, String cuisineType, StorageReference image_ref) {
         this.name = name;
         this.address = address;
         this.cuisineType = cuisineType;
-        this.image_url = image_url;
+        this.image_ref = image_ref;
     }
 
-    private String image_url;
 
 
 
-    public String getImage_url() {
-        return image_url;
-    }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
 
     public String getName() {
         return name;

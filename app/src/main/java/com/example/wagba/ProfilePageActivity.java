@@ -22,6 +22,7 @@ public class ProfilePageActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        binding.bottomNav.setSelectedItemId(R.id.fourthTab);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -30,6 +31,7 @@ public class ProfilePageActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.firstTab:
                         intent = new Intent(getApplicationContext(),RestaurantsActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.secondTab:
                         intent = new Intent(getApplicationContext(),CartActivity.class);

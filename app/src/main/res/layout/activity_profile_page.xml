@@ -49,16 +49,18 @@
                 android:id="@+id/email_tv"
                 android:textColor="@color/black"
                 />
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/phone_tv"
-                android:layout_margin="10dp"
-                android:id="@+id/email_et"
-                android:textColor="@color/white"
-                android:inputType="none"/>
+
+        <EditText
+            android:id="@+id/email_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:editable="false"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toEndOf="@id/phone_tv"
+            app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +82,7 @@
                 app:layout_constraintStart_toEndOf="@id/phone_tv"
                 android:layout_margin="10dp"
                 android:id="@+id/name_et"
-                android:textColor="@color/white"/>
+                android:textColor="@color/black"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -103,7 +105,7 @@
                 app:layout_constraintStart_toEndOf="@id/phone_tv"
                 android:layout_margin="10dp"
                 android:id="@+id/phone_et"
-                android:textColor="@color/white"/>
+                android:textColor="@color/black"/>
 
             <Button
                 android:layout_width="match_parent"

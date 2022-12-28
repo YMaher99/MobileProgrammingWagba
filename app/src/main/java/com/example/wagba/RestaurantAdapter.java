@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +46,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<MyRestaurantHolder> 
         holder.res_name.setText((items.get(position).getName()));
         holder.res_loc.setText((items.get(position).getAddress()));
         holder.res_cuisine.setText((items.get(position).getCuisineType()));
+
+        //TODO IMAGE
+        Glide.with(context.getApplicationContext()).load(items.get(position).image_ref).into(holder.imageView);
         //holder.imageView.setImageResource(items.get(position).getImage());
         //holder.imageView.setImageBitmap(getImageBitmap(items.get(position).getImage_url()));
     }
@@ -51,20 +58,4 @@ public class RestaurantAdapter extends RecyclerView.Adapter<MyRestaurantHolder> 
         return items.size();
     }
 
-    private Bitmap getImageBitmap(String url) {
-        Bitmap bm = null;
-        try {
-            URL aURL = new URL(url);
-            URLConnection conn = aURL.openConnection();
-            conn.connect();
-            InputStream is = conn.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            bm = BitmapFactory.decodeStream(bis);
-            bis.close();
-            is.close();
-        } catch (IOException e) {
-            Log.e("TAG", "Error getting bitmap", e);
-        }
-        return bm;
-    }
 }
