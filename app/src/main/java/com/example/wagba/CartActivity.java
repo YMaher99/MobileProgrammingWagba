@@ -38,7 +38,7 @@ public class CartActivity extends AppCompatActivity {
     List<Meal_Item> items = new ArrayList<Meal_Item>();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
-    final String[] user_token = new String[1];
+    String user_token;
 
     public Cart_Item cart = new Cart_Item("0");
 
@@ -49,38 +49,34 @@ public class CartActivity extends AppCompatActivity {
         View view = binding.getRoot();
         RecyclerView recyclerView = binding.recyclerview;
 
-        binding.bottomNav.setSelectedItemId(R.id.secondTab);
 
         setContentView(view);
+        user_token = user.getEmail().replace(".","");
 
-        user.getIdToken(false).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-            @Override
-            public void onComplete(@NonNull Task<GetTokenResult> task) {
-                if(task.isSuccessful()) {
-                    Log.d("STRINGTEST",task.getResult().getToken());
-
-                    user_token[0] = task.getResult().getToken().replace(".","").substring(800);
-                }
-            }
-        });
 
         ValueEventListener postListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 items = new ArrayList<Meal_Item>();
-                for(DataSnapshot cart_item: dataSnapshot.child(user_token[0]).child("details").getChildren()){
+                if(!dataSnapshot.child(user_token).child("details").exists()){
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items,""));
+                    return;
+                }
+                for(DataSnapshot cart_item: dataSnapshot.child(user_token).child("details").getChildren()){
                     String name = cart_item.child("name").getValue().toString();
                     int numAvailable = Integer.parseInt(cart_item.child("numAvailable").getValue().toString());
                     double price = Double.parseDouble(cart_item.child("price").getValue().toString());
                     boolean isAvailable = Boolean.parseBoolean(cart_item.child("isAvailable").getValue().toString());
+
                     Log.d("CARTTEST", "onDataChange: " + name);
 
                     //TODO REMOVE BRUH
-                    items.add(new Meal_Item(name,price,isAvailable,numAvailable,cart_item.child("restaurantName").getValue().toString()));
+                    items.add(new Meal_Item(name,price,isAvailable,-1,cart_item.child("restaurantName").getValue().toString()));
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 //TODO RESTAURANT NAME STUFF
-                recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items,"Bakery"));
+                recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items,items.get(0).restaurantName));
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -131,5 +127,12 @@ public class CartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        binding.bottomNav.setSelectedItemId(R.id.secondTab);
+
     }
 }

@@ -33,22 +33,14 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
     String restaurant_name;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser user = mAuth.getCurrentUser();
-    final String[] user_token = new String[1];
+    String user_token;
 
     public MealAdapter(Context context, List<Meal_Item> items,String restaurant_name){
         this.context = context;
         this.items = items;
         this.restaurant_name = restaurant_name;
         this.databaseReference= database.getReference(restaurant_name);
-        user.getIdToken(false).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
-            @Override
-            public void onComplete(@NonNull Task<GetTokenResult> task) {
-                if(task.isSuccessful()) {
-                    user_token[0] = task.getResult().getToken().replace(".","").substring(800);
-                    Log.d("STRING",user_token[0]);
-                }
-            }
-        });
+        this.user_token = user.getEmail().replace(".","");
     }
 
 
@@ -72,9 +64,8 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
         holder.add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 int pos = holder.getAdapterPosition();
-
+                final Boolean[] outer_flag = new Boolean[1];
 
 
                 Log.d("TEST NUM",Integer.toString(items.get(pos).getNumAvailable()));
@@ -84,27 +75,41 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             if(task.isSuccessful()) {
-                                task.getResult().child("numAvailable").getRef().setValue(Integer.toString(Integer.parseInt(task.getResult().child("numAvailable").getValue().toString()) - 1));
                                 allTheData.child("cart").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                        if(task.isSuccessful()){
+                                    public void onComplete(@NonNull Task<DataSnapshot> task_inner) {
 
-                                            Log.d("TESTING",task.getResult().toString());
+                                        if(task_inner.isSuccessful()){
 
-                                            if(!task.getResult().exists()){
-                                                task.getResult().child(user_token[0]).child("current").getRef().setValue("1");
-                                                task.getResult().child(user_token[0]).child("details").child("0").getRef().setValue(items.get(pos));
+                                            Log.d("TESTING",task_inner.getResult().toString());
+
+                                            if(!task_inner.getResult().child(user_token).child("current").exists() || task_inner.getResult().child(user_token).child("current").getValue().equals("0")){
+                                                task_inner.getResult().child(user_token).child("current").getRef().setValue("1");
+                                                task_inner.getResult().child(user_token).child("details").child("0").getRef().setValue(items.get(pos));
+                                                task.getResult().child("numAvailable").getRef().setValue(Integer.toString(Integer.parseInt(task.getResult().child("numAvailable").getValue().toString()) - 1));
+                                                Toast.makeText(context.getApplicationContext(), "Added to cart", Toast.LENGTH_SHORT).show();
                                             }
                                             else{
                                                 // TODO IF I NEED TO MAKE IT SO ONLY SAME RESTAURANT ORDERS
-                                                //if(items.get(pos).restaurantName == task.getResult().child(user_token[0]).child("details").child("0").child("restaurantName").getValue().toString())
-                                                task.getResult().child(user_token[0]).child("details").child(task.getResult().child(user_token[0]).child("current").getValue().toString()).getRef().setValue(items.get(pos));
-                                                task.getResult().child(user_token[0]).child("current").getRef().setValue(Integer.toString(Integer.parseInt(task.getResult().child(user_token[0]).child("current").getValue().toString())+1));
+                                                Log.d("CARTTEST",task_inner.getResult().child(user_token).toString());
+                                                if(items.get(pos).restaurantName.equals(task_inner.getResult().child(user_token).child("details").child("0").child("restaurantName").getValue().toString())) {
+                                                    task_inner.getResult().child(user_token).child("details").child(task_inner.getResult().child(user_token).child("current").getValue().toString()).getRef().setValue(items.get(pos));
+                                                    task_inner.getResult().child(user_token).child("current").getRef().setValue(Integer.toString(Integer.parseInt(task_inner.getResult().child(user_token).child("current").getValue().toString()) + 1));
+                                                    task.getResult().child("numAvailable").getRef().setValue(Integer.toString(Integer.parseInt(task.getResult().child("numAvailable").getValue().toString()) - 1));
+                                                    Toast.makeText(context.getApplicationContext(), "Added to cart", Toast.LENGTH_SHORT).show();
+
+                                                }
+                                                else{
+                                                    Toast.makeText(context.getApplicationContext(), "Can only order from one restaurant at a time", Toast.LENGTH_SHORT).show();
+                                                }
                                             }
                                         }
+
                                     }
+
                                 });
+
+
                             }
                         }
                     });
@@ -124,7 +129,10 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
             public void onClick(View view) {
                 // TODO CHECK IF MEAL IN CART AND INCREASE NUMBER OF MEALS IN TEXTVIEW
                 int pos = holder.getAdapterPosition();
-                allTheData.child("cart").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+
+
+                allTheData.child("cart").child(user_token).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         Boolean flag = Boolean.TRUE;
@@ -133,8 +141,9 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                                 if (items.get(pos).getName().equals(meal.child("name").getValue().toString())){
                                     flag = Boolean.FALSE;
                                     meal.getRef().removeValue();
-                                    allTheData.child("cart").child("current").setValue(Integer.toString(Integer.parseInt(task.getResult().child("current").getValue().toString())-1));
-                                    items.get(pos).setNumAvailable(items.get(pos).getNumAvailable()+1);
+
+                                    meal.getRef().getParent().getParent().child("current").setValue(Integer.toString(Integer.parseInt(task.getResult().child("current").getValue().toString())-1));
+                                    //items.get(pos).setNumAvailable(items.get(pos).getNumAvailable()+1);
                                     allTheData.child(restaurant_name).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -162,7 +171,65 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                 });
             }
         });
-        holder.meals_available.setText("Meals Available: " + Integer.toString(items.get(position).getNumAvailable()));
+
+        holder.remove_item_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO CHECK IF MEAL IN CART AND INCREASE NUMBER OF MEALS IN TEXTVIEW
+                int pos = holder.getAdapterPosition();
+
+
+
+                allTheData.child("cart").child(user_token).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        Boolean flag = Boolean.TRUE;
+                        if (task.isSuccessful()) {
+                            for (DataSnapshot meal : task.getResult().child("details").getChildren()){
+                                if (items.get(pos).getName().equals(meal.child("name").getValue().toString())){
+                                    flag = Boolean.FALSE;
+                                    meal.getRef().removeValue();
+
+                                    meal.getRef().getParent().getParent().child("current").setValue(Integer.toString(Integer.parseInt(task.getResult().child("current").getValue().toString())-1));
+                                    //items.get(pos).setNumAvailable(items.get(pos).getNumAvailable()+1);
+                                    allTheData.child(restaurant_name).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                            if(task.isSuccessful()){
+                                                for (DataSnapshot mealInRestaurant : task.getResult().getChildren()){
+                                                    if (items.get(pos).getName().equals(mealInRestaurant.child("name").getValue().toString())){
+                                                        mealInRestaurant.getRef().child("numAvailable").setValue(Integer.parseInt(mealInRestaurant.child("numAvailable").getValue().toString())+1);
+                                                        Toast.makeText(context.getApplicationContext(), "Removed from Cart", Toast.LENGTH_SHORT).show();
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+                                    //TODO increase meals available in db and local object and decrease current in cart
+                                    break;
+                                }
+                            }
+                            if (flag){
+                                Toast.makeText(context.getApplicationContext(), "You do not have this meal in your cart", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                });
+            }
+        });
+
+        if(items.get(position).getNumAvailable()==-1){
+            holder.meals_available.setText("");
+            holder.add_to_cart.setVisibility(View.GONE);
+            holder.remove_from_cart.setVisibility(View.GONE);
+            holder.remove_item_btn.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.meals_available.setText("Meals Available: " + Integer.toString(items.get(position).getNumAvailable()));
+        }
+
     }
 
     @Override

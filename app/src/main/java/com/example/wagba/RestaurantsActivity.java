@@ -47,7 +47,6 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
         setContentView(view);
         mAuth = FirebaseAuth.getInstance();
 
-        binding.bottomNav.setSelectedItemId(R.id.firstTab);
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -127,6 +126,12 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null){startActivity(new Intent(RestaurantsActivity.this,MainActivity.class));}
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        binding.bottomNav.setSelectedItemId(R.id.firstTab);
     }
 
     @Override

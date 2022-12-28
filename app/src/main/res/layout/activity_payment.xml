@@ -106,7 +106,7 @@
         app:layout_constraintBottom_toTopOf="@id/order_now_button"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/black"
-        android:text="100 EGP"
+        android:text="0"
         android:textSize="20dp"
         android:layout_marginBottom="28dp"/>
 

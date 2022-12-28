@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MyMealHolder extends RecyclerView.ViewHolder {
     ImageView availability_icon;
     TextView meal_name, meal_price, meals_available;
-    Button add_to_cart, remove_from_cart;
+    Button add_to_cart, remove_from_cart, remove_item_btn;
 
 
     public MyMealHolder(@NonNull View itemView) {
@@ -22,5 +22,6 @@ public class MyMealHolder extends RecyclerView.ViewHolder {
         add_to_cart = itemView.findViewById(R.id.add_to_cart_button);
         remove_from_cart = itemView.findViewById(R.id.remove_from_cart_button);
         meals_available = itemView.findViewById(R.id.meals_available_tv);
+        remove_item_btn = itemView.findViewById(R.id.remove_item_btn);
     }
 }

@@ -4,18 +4,16 @@ import java.util.ArrayList;
 
 public class Order_Item {
 
-    String orderID;
-    ArrayList<Meal_Item> meals;
-    double total_price;
-    Boolean is_delivered;
+    public String orderID;
+    public ArrayList<Meal_Item> meals;
+    public double total_price;
+    public int delivery_status;
 
-    public Order_Item(String orderID, ArrayList<Meal_Item> meals, Boolean is_delivered) {
+    public Order_Item(String orderID, double total_price, int delivery_status) {
         this.orderID = orderID;
         this.meals = meals;
-        for (Meal_Item meal: meals){
-            total_price+=meal.getPrice();
-        }
-        this.is_delivered = is_delivered;
+        this.total_price = total_price;
+        this.delivery_status = delivery_status;
     }
 
     public String getOrderID() {
@@ -42,11 +40,5 @@ public class Order_Item {
         this.total_price = total_price;
     }
 
-    public Boolean getIs_delivered() {
-        return is_delivered;
-    }
 
-    public void setIs_delivered(Boolean is_delivered) {
-        this.is_delivered = is_delivered;
-    }
 }

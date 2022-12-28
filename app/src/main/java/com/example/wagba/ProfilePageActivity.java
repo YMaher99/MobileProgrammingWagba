@@ -41,7 +41,6 @@ public class ProfilePageActivity extends AppCompatActivity {
 
 
 
-        binding.bottomNav.setSelectedItemId(R.id.fourthTab);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -81,5 +80,12 @@ public class ProfilePageActivity extends AppCompatActivity {
             binding.emailEt.setText(user.getEmail());
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        binding.bottomNav.setSelectedItemId(R.id.fourthTab);
+
     }
 }
