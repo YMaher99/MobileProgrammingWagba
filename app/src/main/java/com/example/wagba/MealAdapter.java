@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,12 +31,24 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
     DatabaseReference databaseReference ;
     DatabaseReference allTheData = database.getReference();
     String restaurant_name;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
+    final String[] user_token = new String[1];
 
     public MealAdapter(Context context, List<Meal_Item> items,String restaurant_name){
         this.context = context;
         this.items = items;
         this.restaurant_name = restaurant_name;
         this.databaseReference= database.getReference(restaurant_name);
+        user.getIdToken(false).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+            @Override
+            public void onComplete(@NonNull Task<GetTokenResult> task) {
+                if(task.isSuccessful()) {
+                    user_token[0] = task.getResult().getToken().replace(".","").substring(800);
+                    Log.d("STRING",user_token[0]);
+                }
+            }
+        });
     }
 
 
@@ -57,43 +72,44 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
         holder.add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 int pos = holder.getAdapterPosition();
+
+
 
                 Log.d("TEST NUM",Integer.toString(items.get(pos).getNumAvailable()));
                 if(items.get(pos).getNumAvailable()>0){
-                    String meal_name = items.get(pos).getName();
 
-                    databaseReference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    allTheData.child(items.get(pos).restaurantName).child(Integer.toString(pos)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            Integer meal_num = null;
-                            DataSnapshot needed_restaurant = null;
-                            if (task.isSuccessful()){
-                                for (DataSnapshot meal: task.getResult().getChildren()){
-                                    if(meal.child("name").getValue().toString().equals(meal_name)){
-                                        meal_num = Integer.parseInt(meal.getKey().toString());
-                                        needed_restaurant = meal;
-                                        break;
-                                    }
-                                }
-                                if (meal_num != null) {
-                                    databaseReference.child(Integer.toString(meal_num)).child("numAvailable").setValue(Integer.toString(Integer.parseInt(needed_restaurant.child("numAvailable").getValue().toString())-1));
-                                    items.get(pos).setNumAvailable(items.get(pos).getNumAvailable()-1);
-                                    allTheData.child("cart").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                            if(task.isSuccessful()) {
-                                                //TODO add to cart (DONE NEEDS TESTING)
-                                                Toast.makeText(context.getApplicationContext(), "Added to cart", Toast.LENGTH_SHORT).show();
-                                                allTheData.child("cart").child("details").child(task.getResult().child("current").getValue().toString()).setValue(items.get(pos));
-                                                allTheData.child("cart").child("current").setValue(Integer.parseInt(task.getResult().child("current").getValue().toString())+1);
+                            if(task.isSuccessful()) {
+                                task.getResult().child("numAvailable").getRef().setValue(Integer.toString(Integer.parseInt(task.getResult().child("numAvailable").getValue().toString()) - 1));
+                                allTheData.child("cart").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if(task.isSuccessful()){
+
+                                            Log.d("TESTING",task.getResult().toString());
+
+                                            if(!task.getResult().exists()){
+                                                task.getResult().child(user_token[0]).child("current").getRef().setValue("1");
+                                                task.getResult().child(user_token[0]).child("details").child("0").getRef().setValue(items.get(pos));
+                                            }
+                                            else{
+                                                // TODO IF I NEED TO MAKE IT SO ONLY SAME RESTAURANT ORDERS
+                                                //if(items.get(pos).restaurantName == task.getResult().child(user_token[0]).child("details").child("0").child("restaurantName").getValue().toString())
+                                                task.getResult().child(user_token[0]).child("details").child(task.getResult().child(user_token[0]).child("current").getValue().toString()).getRef().setValue(items.get(pos));
+                                                task.getResult().child(user_token[0]).child("current").getRef().setValue(Integer.toString(Integer.parseInt(task.getResult().child(user_token[0]).child("current").getValue().toString())+1));
                                             }
                                         }
-                                    });
-                                }
+                                    }
+                                });
                             }
                         }
                     });
+
+
                     // TODO DECREASE NUMBER OF MEALS IN TEXTVIEW AND ADD TO CART IN DB (DONE I THINK NEEDS TESTING)
                 }
                 else{

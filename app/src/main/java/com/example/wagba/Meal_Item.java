@@ -12,8 +12,8 @@ public class Meal_Item {
     }
 
     public Meal_Item(String name, double price, Boolean isAvailable){
-        //TODO REMOVE BRUH
-        this(name,price,isAvailable,0,"bruh");
+
+        this(name,price,isAvailable,0,"");
     }
 
     public Meal_Item(String name, double price, Boolean isAvailable, int numAvailable, String restaurantName) {

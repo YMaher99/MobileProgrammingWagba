@@ -46,6 +46,7 @@ public class RestaurantActivity extends AppCompatActivity {
         items = new ArrayList<Meal_Item>();
         Glide.with(this).load(storageReference.child(res_name+".png")).into(binding.restaurantLogo);
 
+
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

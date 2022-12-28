@@ -13,7 +13,12 @@ import android.view.View;
 
 import com.example.wagba.databinding.ActivityCartBinding;
 import com.example.wagba.databinding.ActivityRestaurantBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +36,9 @@ public class CartActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://wagba-6d31f-default-rtdb.europe-west1.firebasedatabase.app/");
     DatabaseReference cartRef = database.getReference("cart");
     List<Meal_Item> items = new ArrayList<Meal_Item>();
-
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = mAuth.getCurrentUser();
+    final String[] user_token = new String[1];
 
     public Cart_Item cart = new Cart_Item("0");
 
@@ -44,14 +51,24 @@ public class CartActivity extends AppCompatActivity {
 
         binding.bottomNav.setSelectedItemId(R.id.secondTab);
 
-
         setContentView(view);
+
+        user.getIdToken(false).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+            @Override
+            public void onComplete(@NonNull Task<GetTokenResult> task) {
+                if(task.isSuccessful()) {
+                    Log.d("STRINGTEST",task.getResult().getToken());
+
+                    user_token[0] = task.getResult().getToken().replace(".","").substring(800);
+                }
+            }
+        });
 
         ValueEventListener postListener = new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 items = new ArrayList<Meal_Item>();
-                for(DataSnapshot cart_item: dataSnapshot.child("details").getChildren()){
+                for(DataSnapshot cart_item: dataSnapshot.child(user_token[0]).child("details").getChildren()){
                     String name = cart_item.child("name").getValue().toString();
                     int numAvailable = Integer.parseInt(cart_item.child("numAvailable").getValue().toString());
                     double price = Double.parseDouble(cart_item.child("price").getValue().toString());
@@ -59,7 +76,7 @@ public class CartActivity extends AppCompatActivity {
                     Log.d("CARTTEST", "onDataChange: " + name);
 
                     //TODO REMOVE BRUH
-                    items.add(new Meal_Item(name,price,isAvailable,numAvailable,"bruh"));
+                    items.add(new Meal_Item(name,price,isAvailable,numAvailable,cart_item.child("restaurantName").getValue().toString()));
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 //TODO RESTAURANT NAME STUFF
