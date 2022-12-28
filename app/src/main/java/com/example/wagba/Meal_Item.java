@@ -5,20 +5,26 @@ public class Meal_Item {
     public double price;
     public Boolean isAvailable;
     public int numAvailable;
+    public String restaurantName;
+
     public Meal_Item(){
 
     }
 
     public Meal_Item(String name, double price, Boolean isAvailable){
-        this(name,price,isAvailable,0);
+        //TODO REMOVE BRUH
+        this(name,price,isAvailable,0,"bruh");
     }
 
-    public Meal_Item(String name, double price, Boolean isAvailable, int numAvailable) {
+    public Meal_Item(String name, double price, Boolean isAvailable, int numAvailable, String restaurantName) {
         this.name = name;
         this.price = price;
         this.isAvailable = isAvailable;
         this.numAvailable = numAvailable;
+        this.restaurantName = restaurantName;
     }
+
+
 
     public String getName() {
         return name;

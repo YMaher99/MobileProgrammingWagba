@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfilePageActivity"
-    android:background="@color/grey">
+    android:background="@color/white">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -46,7 +46,9 @@
                 app:layout_constraintTop_toTopOf="@id/email_et"
                 app:layout_constraintBottom_toBottomOf="@id/email_et"
                 app:layout_constraintStart_toStartOf="parent"
-                android:id="@+id/email_tv"/>
+                android:id="@+id/email_tv"
+                android:textColor="@color/black"
+                />
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -55,7 +57,8 @@
                 app:layout_constraintStart_toEndOf="@id/phone_tv"
                 android:layout_margin="10dp"
                 android:id="@+id/email_et"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:inputType="none"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,7 +69,8 @@
                 app:layout_constraintTop_toTopOf="@id/name_et"
                 app:layout_constraintBottom_toBottomOf="@id/name_et"
                 app:layout_constraintStart_toStartOf="parent"
-                android:id="@+id/name_tv"/>
+                android:id="@+id/name_tv"
+                android:textColor="@color/black"/>
 
             <EditText
                 android:layout_width="0dp"
@@ -88,6 +92,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/phone_et"
                 app:layout_constraintBottom_toBottomOf="@id/phone_et"
+                android:textColor="@color/black"
                 />
 
             <EditText
@@ -106,9 +111,10 @@
                 app:layout_constraintBottom_toTopOf="@id/sign_out_btn"
                 android:background="@color/foreground_element"
                 android:layout_margin="10dp"
-                android:text="Edit Information"
+                android:text="EDIT INFROMATION"
                 android:id="@+id/edit_btn"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:textColor="@color/dark_grey"/>
 
         <Button
             android:layout_width="match_parent"
@@ -117,7 +123,8 @@
             android:background="@color/foreground_element"
             android:layout_margin="10dp"
             android:text="Sign Out"
-            android:id="@+id/sign_out_btn"/>
+            android:id="@+id/sign_out_btn"
+            android:textColor="@color/dark_grey"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

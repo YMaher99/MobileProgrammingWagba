@@ -51,7 +51,7 @@ public class RestaurantActivity extends AppCompatActivity {
                     double price = Double.parseDouble(meal.child("price").getValue().toString());
                     Boolean isAvailable = Boolean.parseBoolean(meal.child("isAvailable").getValue().toString());
                     int numAvailable = Integer.parseInt(meal.child("numAvailable").getValue().toString());
-                    items.add(new Meal_Item(name,price,isAvailable,numAvailable));
+                    items.add(new Meal_Item(name,price,isAvailable,numAvailable, restaurant.getKey()));
 
 
                 }

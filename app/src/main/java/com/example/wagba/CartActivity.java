@@ -57,7 +57,9 @@ public class CartActivity extends AppCompatActivity {
                     double price = Double.parseDouble(cart_item.child("price").getValue().toString());
                     boolean isAvailable = Boolean.parseBoolean(cart_item.child("isAvailable").getValue().toString());
                     Log.d("CARTTEST", "onDataChange: " + name);
-                    items.add(new Meal_Item(name,price,isAvailable,numAvailable));
+
+                    //TODO REMOVE BRUH
+                    items.add(new Meal_Item(name,price,isAvailable,numAvailable,"bruh"));
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 //TODO RESTAURANT NAME STUFF
