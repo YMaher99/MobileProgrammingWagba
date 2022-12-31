@@ -114,4 +114,9 @@ public class OrderHistoryActivity extends AppCompatActivity implements RecyclerV
         intent.putExtra("order_name",items.get(position).orderID);
         startActivity(intent);
     }
+
+    @Override
+    public void onItemClick(String restaurant_name) {
+        return;
+    }
 }

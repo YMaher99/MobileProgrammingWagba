@@ -51,16 +51,7 @@
 
     ></ImageView>
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layoutDirection="rtl"
 
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/bg_white_rounded"
-            />
 
 
 

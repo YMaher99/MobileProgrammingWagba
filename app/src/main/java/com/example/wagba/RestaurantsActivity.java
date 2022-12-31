@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.wagba.databinding.ActivityRestaurantsBinding;
 import com.google.android.material.navigation.NavigationBarView;
@@ -28,6 +29,7 @@ import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class RestaurantsActivity extends AppCompatActivity implements RecyclerViewInterface {
 
@@ -53,6 +55,18 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
 
         searchView = binding.searchView;
         searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -70,8 +84,8 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
                 RecyclerView recyclerView = binding.recyclerview;
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                
-                recyclerView.setAdapter(new RestaurantAdapter(getApplicationContext(),items,RestaurantsActivity.this));
+                restaurantAdapter = new RestaurantAdapter(getApplicationContext(),items,RestaurantsActivity.this);
+                recyclerView.setAdapter(restaurantAdapter);
                 //Log.d("restaurants",dataSnapshot.getChildren());
                 // ..
             }
@@ -124,8 +138,27 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
         RecyclerView recyclerView = binding.recyclerview;
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RestaurantAdapter(getApplicationContext(),items,this));
+        restaurantAdapter = new RestaurantAdapter(getApplicationContext(),items,this);
+        recyclerView.setAdapter(restaurantAdapter);
 
+    }
+
+    private void filterList(String text) {
+        List<Restaurant_Item> filteredList = new ArrayList<Restaurant_Item>();
+        for (Restaurant_Item restaurant_item: items){
+            if (restaurant_item.getName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(restaurant_item);
+            }
+        }
+        
+        if(filteredList.isEmpty()){
+            Toast.makeText(this, "No restaurants match that name", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            restaurantAdapter = new RestaurantAdapter(getApplicationContext(),filteredList,this);
+            restaurantAdapter.notifyDataSetChanged();
+            binding.recyclerview.setAdapter(restaurantAdapter);
+        }
     }
 
     @Override
@@ -143,9 +176,14 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
 
     @Override
     public void onItemClick(int position) {
-        Log.i("RESTAURANT",items.get(position).getName());
+        return;
+    }
+
+    @Override
+    public void onItemClick(String restaurant_name) {
+        Log.i("RESTAURANT",restaurant_name);
         Intent intent = new Intent(this, RestaurantActivity.class);
-        intent.putExtra("res_name",items.get(position).getName());
+        intent.putExtra("res_name",restaurant_name);
         startActivity(intent);
     }
 }

@@ -2,6 +2,7 @@ package com.example.wagba;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.wagba.databinding.ActivityCartBinding;
@@ -34,6 +36,8 @@ public class RestaurantActivity extends AppCompatActivity {
     DatabaseReference restaurant;
     List<Meal_Item> items;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
+    MealAdapter mealAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,8 @@ public class RestaurantActivity extends AppCompatActivity {
                 RecyclerView recyclerView = binding.rv;
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items,res_name));
+                mealAdapter = new MealAdapter(getApplicationContext(),items,res_name);
+                recyclerView.setAdapter(mealAdapter);
                 //Log.d("restaurants",dataSnapshot.getChildren());
                 // ..
             }
@@ -83,7 +88,8 @@ public class RestaurantActivity extends AppCompatActivity {
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items,res_name));
+        mealAdapter = new MealAdapter(getApplicationContext(),items,res_name);
+        recyclerView.setAdapter(mealAdapter);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -117,6 +123,26 @@ public class RestaurantActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    private void filterList(String text) {
+        List<Meal_Item> filteredList = new ArrayList<Meal_Item>();
+
+        for (Meal_Item meal_item: items){
+            if (meal_item.getName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(meal_item);
+            }
+        }
+
+        if(filteredList.isEmpty()){
+            Toast.makeText(this, "No restaurants match that name", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            mealAdapter = new MealAdapter(getApplicationContext(),filteredList,filteredList.get(0).restaurantName);
+            mealAdapter.notifyDataSetChanged();
+            binding.rv.setAdapter(mealAdapter);
+        }
     }
 
 

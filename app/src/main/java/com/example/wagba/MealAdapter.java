@@ -1,6 +1,7 @@
 package com.example.wagba;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -165,7 +166,28 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                             if (flag){
                                 Toast.makeText(context.getApplicationContext(), "You do not have this meal in your cart", Toast.LENGTH_SHORT).show();
                             }
+                            allTheData.child("cart").child(user_token).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> update_cart_task) {
+                                    if(update_cart_task.isSuccessful()){
+                                        Integer i = 0;
+                                        Log.d("OBJECTTEST", update_cart_task.getResult().child("details").getChildren().toString());
+
+                                        for(DataSnapshot meal: update_cart_task.getResult().child("details").getChildren()){
+
+                                            if(Integer.parseInt(meal.getKey()) != i){
+                                                Object tempObj = meal.getValue();
+                                                meal.getRef().removeValue();
+                                                update_cart_task.getResult().child("details").child(i.toString()).getRef().setValue(tempObj);
+                                                i++;
+                                            }
+                                        }
+                                    }
+
+                                }
+                            });
                         }
+
                     }
 
                 });
@@ -194,9 +216,9 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                                     //items.get(pos).setNumAvailable(items.get(pos).getNumAvailable()+1);
                                     allTheData.child(restaurant_name).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                         @Override
-                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                            if(task.isSuccessful()){
-                                                for (DataSnapshot mealInRestaurant : task.getResult().getChildren()){
+                                        public void onComplete(@NonNull Task<DataSnapshot> inner_task) {
+                                            if(inner_task.isSuccessful()){
+                                                for (DataSnapshot mealInRestaurant : inner_task.getResult().getChildren()){
                                                     if (items.get(pos).getName().equals(mealInRestaurant.child("name").getValue().toString())){
                                                         mealInRestaurant.getRef().child("numAvailable").setValue(Integer.parseInt(mealInRestaurant.child("numAvailable").getValue().toString())+1);
                                                         Toast.makeText(context.getApplicationContext(), "Removed from Cart", Toast.LENGTH_SHORT).show();
@@ -213,10 +235,30 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                             if (flag){
                                 Toast.makeText(context.getApplicationContext(), "You do not have this meal in your cart", Toast.LENGTH_SHORT).show();
                             }
+                            allTheData.child("cart").child(user_token).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> update_cart_task) {
+                                    if(update_cart_task.isSuccessful()){
+                                        Integer i = 0;
+                                        Log.d("OBJECTTEST", update_cart_task.getResult().child("details").getChildren().toString());
+
+                                        for(DataSnapshot meal: update_cart_task.getResult().child("details").getChildren()){
+
+                                            if(Integer.parseInt(meal.getKey()) != i){
+                                                Object tempObj = meal.getValue();
+                                                meal.getRef().removeValue();
+                                                update_cart_task.getResult().child("details").child(i.toString()).getRef().setValue(tempObj);
+                                                i++;
+                                            }
+                                        }
+                                    }
+
+                                }
+                            });
                         }
                     }
 
-                });
+                    });
             }
         });
 

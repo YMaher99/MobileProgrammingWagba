@@ -24,7 +24,7 @@ public class MyRestaurantHolder extends RecyclerView.ViewHolder {
                 if (recyclerViewInterface != null){
                     int position = getAdapterPosition();
                     if(position != RecyclerView.NO_POSITION){
-                        recyclerViewInterface.onItemClick(position);
+                        recyclerViewInterface.onItemClick(res_name.getText().toString());
                     }
                 }
             }
