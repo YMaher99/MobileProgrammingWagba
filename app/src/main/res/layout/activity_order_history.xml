@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Order History"
+                android:text="@string/order_history"
                 android:textColor="@color/foreground_element"
                 android:textSize="25sp"
                 android:textStyle="bold"

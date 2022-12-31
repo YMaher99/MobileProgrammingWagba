@@ -16,7 +16,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.2"
         android:gravity="center"
-        android:text="Order Number ####"
+        android:text="@string/order_number"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/rv"

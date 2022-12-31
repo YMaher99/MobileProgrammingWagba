@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Checkout"
+        android:text="@string/checkout_tv_top"
         android:textSize="25sp"
         android:textStyle="bold"
         android:padding="5dp"
@@ -56,7 +56,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Payment Type"
+        android:text="@string/payment_type"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -76,13 +76,13 @@
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Credit Card"
+            android:text="@string/credit_card"
             android:textSize="16dp"
             />
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Cash On Delivery"
+            android:text="@string/cash_on_delivery"
             android:textSize="16dp"/>
     </RadioGroup>
 
@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/order_now_button"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Payment Total"
+        android:text="@string/payment_total"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:layout_marginBottom="28dp"/>
@@ -117,7 +117,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/payment_radio_group"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Delivery Time"
+        android:text="@string/delivery_time"
         android:textColor="@color/foreground_element"
         android:textSize="20dp"
 
@@ -134,12 +134,12 @@
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="12:00 PM"
+            android:text="@string/_12_00_pm"
             android:textSize="16dp"/>
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="03:00 PM"
+            android:text="@string/_03_00_pm"
             android:textSize="16dp"/>
 
 
@@ -152,7 +152,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/delivery_radio_group"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Delivery Gate"
+        android:text="@string/delivery_gate"
         android:textColor="@color/foreground_element"
         android:textSize="20dp"
         />
@@ -169,13 +169,13 @@
     <RadioButton
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Gate 3"
+        android:text="@string/gate_3"
         android:textSize="16dp"/>
     <RadioButton
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Gate 4"
+        android:text="@string/gate_4"
         android:textSize="16dp"/>
 
     </RadioGroup>
@@ -189,7 +189,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="10dp"
-        android:text="Order NOW"
+        android:text="@string/order_now"
         android:textColor="@color/dark_grey"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

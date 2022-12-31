@@ -2,6 +2,8 @@ package com.example.wagba;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+
 public class SignUp extends AppCompatActivity {
 
     ActivitySignUpBinding binding;
@@ -26,22 +30,8 @@ public class SignUp extends AppCompatActivity {
     DatabaseReference users = database.getReference();
 
     FirebaseAuth mAuth;
+    UserViewModel mUserViewModel;
 
-    public class User {
-
-        public String email;
-        public String password;
-
-        public User() {
-
-        }
-
-        public User(String email, String password) {
-            this.email = email;
-            this.password = password;
-        }
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +41,17 @@ public class SignUp extends AppCompatActivity {
         setContentView(view);
         mAuth = FirebaseAuth.getInstance();
 
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+
+
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = binding.emailText.getText().toString();
                 String password = binding.passwordText.getText().toString();
+                String name = binding.nameText.getText().toString();
+                String phone = binding.numberText.getText().toString();
                 if(!password.equals(binding.confirmPasswordText.getText().toString())){return;}
 
                 if(TextUtils.isEmpty(email)){
@@ -72,6 +68,15 @@ public class SignUp extends AppCompatActivity {
                     binding.confirmPasswordText.setError("Does not match the password");
                     binding.confirmPasswordText.requestFocus();}
 
+                else if(TextUtils.isEmpty(name)){
+                    binding.nameText.setError("Enter your name");
+                    binding.nameText.requestFocus();
+                }
+                else if(TextUtils.isEmpty(phone)){
+                    binding.numberText.setError("Enter your phone number");
+                    binding.numberText.requestFocus();
+                }
+
                 else{
                     mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -79,12 +84,14 @@ public class SignUp extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 Toast.makeText(SignUp.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SignUp.this,MainActivity.class));
+                                mUserViewModel.insert(new User(email,name,phone));
                             }
                             else{
                                 Toast.makeText(SignUp.this, "Registration Failed " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
+
                 }
 
             }

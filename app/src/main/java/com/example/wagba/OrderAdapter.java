@@ -45,6 +45,11 @@ public class OrderAdapter extends RecyclerView.Adapter<MyOrderHolder> {
             case 3:
                 holder.order_status.setText("Order Status: Delivery");
                 break;
+            case 4:
+                holder.order_status.setText("Order Status: Delivered");
+            default:
+                holder.order_status.setText("Order Status: Delivered");
+
 
         }
 

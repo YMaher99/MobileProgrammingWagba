@@ -2,6 +2,8 @@ package com.example.wagba;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,10 +19,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 
+import java.util.List;
+
 public class ProfilePageActivity extends AppCompatActivity {
 
     ActivityProfilePageBinding binding;
     FirebaseAuth mAuth;
+    UserViewModel mUserViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,7 @@ public class ProfilePageActivity extends AppCompatActivity {
         binding = ActivityProfilePageBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -80,6 +86,30 @@ public class ProfilePageActivity extends AppCompatActivity {
             binding.emailEt.setText(user.getEmail());
 
         }
+
+        mUserViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        mUserViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
+            @Override
+            public void onChanged(List<User> users) {
+                for(User user: users){
+                    if (user.getEmail().equals(binding.emailEt.getText().toString())){
+                        binding.nameEt.setText(user.getName());
+                        binding.phoneEt.setText(user.getPhone());
+                    }
+                }
+            }
+        });
+
+        binding.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mUserViewModel.insert(new User( binding.emailEt.getText().toString(),
+                                                binding.nameEt.getText().toString(),
+                                                binding.phoneEt.getText().toString()));
+
+            }
+        });
+
     }
 
     @Override

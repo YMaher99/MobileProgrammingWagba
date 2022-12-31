@@ -130,7 +130,6 @@
                 android:textColorHint="@color/grey"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/foreground_element"
-                android:inputType="textPassword"
                 />
 
 

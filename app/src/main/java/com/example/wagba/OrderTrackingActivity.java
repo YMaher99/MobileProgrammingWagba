@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import moe.feng.common.stepperview.VerticalStepperItemView;
+import moe.feng.common.stepperview.VerticalStepperView;
 
 
 public class OrderTrackingActivity extends AppCompatActivity {
@@ -49,8 +50,12 @@ public class OrderTrackingActivity extends AppCompatActivity {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(Integer.parseInt(snapshot.child("delivery_status").getValue().toString())>=1) {
-                    mSteppers[Integer.parseInt(snapshot.child("delivery_status").getValue().toString()) - 1].nextStep();
+                int delivery_status = Integer.parseInt(snapshot.child("delivery_status").getValue().toString());
+                if(delivery_status>=1) {
+                    for (int i = 1; i <= 4; i++) {
+                        mSteppers[i - 1].nextStep();
+                    }
+                    if(delivery_status == 4){mSteppers[3].setState(VerticalStepperItemView.STATE_DONE);}
                 }
             }
 

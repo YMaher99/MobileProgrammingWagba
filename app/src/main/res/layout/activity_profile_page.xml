@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Profile"
+        android:text="@string/profile"
         android:textColor="@color/foreground_element"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="@string/email"
                 android:textSize="18sp"
                 android:layout_margin="10dp"
                 app:layout_constraintTop_toTopOf="@id/email_et"
@@ -65,7 +65,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="@string/name"
                 android:textSize="18sp"
                 android:layout_margin="10dp"
                 app:layout_constraintTop_toTopOf="@id/name_et"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/phone_tv"
                 app:layout_constraintTop_toBottomOf="@id/name_tv"
-                android:text="Phone Number"
+                android:text="@string/phone_number"
                 android:layout_margin="10dp"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +113,7 @@
                 app:layout_constraintBottom_toTopOf="@id/sign_out_btn"
                 android:background="@color/foreground_element"
                 android:layout_margin="10dp"
-                android:text="EDIT INFROMATION"
+                android:text="@string/edit_infromation"
                 android:id="@+id/edit_btn"
                 android:inputType="number"
                 android:textColor="@color/dark_grey"/>
@@ -124,7 +124,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@color/foreground_element"
             android:layout_margin="10dp"
-            android:text="Sign Out"
+            android:text="@string/sign_out"
             android:id="@+id/sign_out_btn"
             android:textColor="@color/dark_grey"/>
 

@@ -6,5 +6,29 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="checkout">Proceed to Checkout</string>
+    <string name="cart">Cart</string>
+    <string name="order_history">Order History</string>
+    <string name="order_number">Order Number ####</string>
+    <string name="checkout_tv_top">Checkout</string>
+    <string name="payment_type">Payment Type</string>
+    <string name="credit_card">Credit Card</string>
+    <string name="cash_on_delivery">Cash On Delivery</string>
+    <string name="payment_total">Payment Total</string>
+    <string name="delivery_time">Delivery Time</string>
+    <string name="_12_00_pm">12:00 PM</string>
+    <string name="_03_00_pm">03:00 PM</string>
+    <string name="delivery_gate">Delivery Gate</string>
+    <string name="gate_3">Gate 3</string>
+    <string name="gate_4">Gate 4</string>
+    <string name="order_now">Order NOW</string>
+    <string name="profile">Profile</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="edit_infromation">EDIT INFROMATION</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="meals_available_x">Meals Available: X</string>
+    <string name="meal_price">Meal Price</string>
 
 </resources>

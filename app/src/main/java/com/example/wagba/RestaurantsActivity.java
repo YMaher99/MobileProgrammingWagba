@@ -2,6 +2,7 @@ package com.example.wagba;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,6 +39,8 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
     List<Restaurant_Item> items = new ArrayList<Restaurant_Item>();
     FirebaseAuth mAuth;
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    RestaurantAdapter restaurantAdapter;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,9 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
         setContentView(view);
         mAuth = FirebaseAuth.getInstance();
 
+
+        searchView = binding.searchView;
+        searchView.clearFocus();
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -64,6 +70,7 @@ public class RestaurantsActivity extends AppCompatActivity implements RecyclerVi
                 RecyclerView recyclerView = binding.recyclerview;
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                
                 recyclerView.setAdapter(new RestaurantAdapter(getApplicationContext(),items,RestaurantsActivity.this));
                 //Log.d("restaurants",dataSnapshot.getChildren());
                 // ..
