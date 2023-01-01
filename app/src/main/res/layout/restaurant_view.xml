@@ -31,7 +31,6 @@
           app:layout_constraintTop_toTopOf="parent"
           android:foregroundGravity="center"
           android:scaleType="fitCenter"
-
           ></ImageView>
 
       <androidx.constraintlayout.widget.ConstraintLayout

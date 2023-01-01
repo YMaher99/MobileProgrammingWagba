@@ -55,7 +55,7 @@ public class OrderTrackingActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int delivery_status = Integer.parseInt(snapshot.child("delivery_status").getValue().toString());
                 if(delivery_status>=1) {
-                    for (int i = 1; i <= 4; i++) {
+                    for (int i = 1; i <= delivery_status; i++) {
                         mSteppers[i - 1].nextStep();
                     }
                     if(delivery_status == 4){mSteppers[3].setState(VerticalStepperItemView.STATE_DONE);}
