@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -32,6 +33,7 @@ public class OrderTrackingActivity extends AppCompatActivity {
     DatabaseReference orders = database.getReference("orders");
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String user_token = mAuth.getCurrentUser().getEmail().replace(".","");
+    String order_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,8 @@ public class OrderTrackingActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.topTv.setText(getIntent().getStringExtra("order_name"));
+        order_name = getIntent().getStringExtra("order_name");
+        binding.topTv.setText(order_name);
 
         mSteppers[0] = binding.stepper0;
         mSteppers[1] = binding.stepper1;
@@ -64,7 +67,8 @@ public class OrderTrackingActivity extends AppCompatActivity {
 
             }
         };
-        orders.child(user_token).child(getIntent().getStringExtra("order_name")).addValueEventListener(postListener);
+
+        orders.child(user_token).child(order_name).addValueEventListener(postListener);
 
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

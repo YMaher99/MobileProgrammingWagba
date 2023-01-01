@@ -71,11 +71,9 @@ public class CartActivity extends AppCompatActivity {
 
                     Log.d("CARTTEST", "onDataChange: " + name);
 
-                    //TODO REMOVE BRUH
                     items.add(new Meal_Item(name,price,isAvailable,-1,cart_item.child("restaurantName").getValue().toString()));
                 }
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                //TODO RESTAURANT NAME STUFF
                 recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items,items.get(0).restaurantName));
             }
             @Override
@@ -89,7 +87,6 @@ public class CartActivity extends AppCompatActivity {
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //TODO RESTAURANT NAME STUFF
         recyclerView.setAdapter(new MealAdapter(getApplicationContext(),items,"Bakery"));
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

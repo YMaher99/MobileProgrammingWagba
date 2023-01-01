@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://wagba-6d31f-default-rtdb.europe-west1.firebasedatabase.app/");
-    DatabaseReference users = database.getReference();
+    DatabaseReference orders = database.getReference("orders");
 
     FirebaseAuth mAuth;
 
@@ -70,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 Toast.makeText(MainActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(MainActivity.this,RestaurantsActivity.class));
+                                orders.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            if (!task.getResult().child(mAuth.getCurrentUser().getEmail().replace(".","")).exists()){
+                                                task.getResult().child(mAuth.getCurrentUser().getEmail().replace(".","")).child("current").getRef().setValue("0");
+                                            }
+                                        }
+                                    }
+                                });
                             }
                             else{
                                 Toast.makeText(MainActivity.this, "Logging in failed: "+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();

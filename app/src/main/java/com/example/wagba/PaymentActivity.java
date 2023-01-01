@@ -64,7 +64,7 @@ public class PaymentActivity extends AppCompatActivity {
         binding.orderNowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!(binding.paymentTotalTv.getText().toString().equals(0))){
+                if((binding.paymentTotalTv.getText().toString().equals("0"))){
                     Toast.makeText(PaymentActivity.this, "Can't order an empty order", Toast.LENGTH_SHORT).show();
                 }
                 if(binding.paymentRadioGroup.getCheckedRadioButtonId() != -1 && binding.deliveryRadioGroup.getCheckedRadioButtonId() != -1 && binding.deliveryGateRadioGroup.getCheckedRadioButtonId() != -1){
@@ -74,12 +74,12 @@ public class PaymentActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 if(!task.getResult().child(user_token).child("current").exists()){
                                     task.getResult().child(user_token).child("current").getRef().setValue("1");
-                                    task.getResult().child(user_token).child("Order0").getRef().setValue(new Order_Item("Order0",Double.parseDouble(binding.mealPriceTv.getText().toString()),1));
+                                    task.getResult().child(user_token).child("Order0").getRef().setValue(new Order_Item("Order0",Double.parseDouble(binding.mealPriceTv.getText().toString()),0));
                                     cartRef.child(user_token).child("current").setValue("0");
                                     cartRef.child(user_token).child("details").removeValue();
                                 }
                                 else{
-                                    task.getResult().child(user_token).child("Order"+task.getResult().child(user_token).child("current").getValue().toString()).getRef().setValue(new Order_Item("Order"+task.getResult().child(user_token).child("current").getValue().toString(),Double.parseDouble(binding.mealPriceTv.getText().toString()),1));
+                                    task.getResult().child(user_token).child("Order"+task.getResult().child(user_token).child("current").getValue().toString()).getRef().setValue(new Order_Item("Order"+task.getResult().child(user_token).child("current").getValue().toString(),Double.parseDouble(binding.mealPriceTv.getText().toString()),0));
                                     task.getResult().child(user_token).child("current").getRef().setValue(Integer.toString(Integer.parseInt(task.getResult().child(user_token).child("current").getValue().toString()) + 1));
                                     cartRef.child(user_token).child("current").setValue("0");
                                     cartRef.child(user_token).child("details").removeValue();
@@ -91,7 +91,7 @@ public class PaymentActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(PaymentActivity.this, "Please select choices for all radiogroups", Toast.LENGTH_SHORT).show();
                 }
-                startActivity(new Intent(PaymentActivity.this,OrderTrackingActivity.class));
+                startActivity(new Intent(PaymentActivity.this,OrderHistoryActivity.class));
             }
         });
     }

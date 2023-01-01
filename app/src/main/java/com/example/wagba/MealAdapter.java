@@ -91,7 +91,6 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                                                 Toast.makeText(context.getApplicationContext(), "Added to cart", Toast.LENGTH_SHORT).show();
                                             }
                                             else{
-                                                // TODO IF I NEED TO MAKE IT SO ONLY SAME RESTAURANT ORDERS
                                                 Log.d("CARTTEST",task_inner.getResult().child(user_token).toString());
                                                 if(items.get(pos).restaurantName.equals(task_inner.getResult().child(user_token).child("details").child("0").child("restaurantName").getValue().toString())) {
                                                     task_inner.getResult().child(user_token).child("details").child(task_inner.getResult().child(user_token).child("current").getValue().toString()).getRef().setValue(items.get(pos));
@@ -116,7 +115,6 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                     });
 
 
-                    // TODO DECREASE NUMBER OF MEALS IN TEXTVIEW AND ADD TO CART IN DB (DONE I THINK NEEDS TESTING)
                 }
                 else{
                     Log.d("MEAL",Integer.toString(items.get(pos).getNumAvailable()));
@@ -128,7 +126,6 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
         holder.remove_from_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO CHECK IF MEAL IN CART AND INCREASE NUMBER OF MEALS IN TEXTVIEW
                 int pos = holder.getAdapterPosition();
 
 
@@ -159,7 +156,6 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                                             }
                                         }
                                     });
-                                    //TODO increase meals available in db and local object and decrease current in cart
                                     break;
                                 }
                             }
@@ -197,7 +193,6 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
         holder.remove_item_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO CHECK IF MEAL IN CART AND INCREASE NUMBER OF MEALS IN TEXTVIEW
                 int pos = holder.getAdapterPosition();
 
 
@@ -228,7 +223,6 @@ public class MealAdapter extends RecyclerView.Adapter<MyMealHolder> {
                                             }
                                         }
                                     });
-                                    //TODO increase meals available in db and local object and decrease current in cart
                                     break;
                                 }
                             }

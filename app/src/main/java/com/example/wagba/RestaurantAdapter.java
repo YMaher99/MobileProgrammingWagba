@@ -47,7 +47,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<MyRestaurantHolder> 
         holder.res_loc.setText((items.get(position).getAddress()));
         holder.res_cuisine.setText((items.get(position).getCuisineType()));
 
-        //TODO IMAGE
         Glide.with(context.getApplicationContext()).load(items.get(position).image_ref).into(holder.imageView);
         //holder.imageView.setImageResource(items.get(position).getImage());
         //holder.imageView.setImageBitmap(getImageBitmap(items.get(position).getImage_url()));
